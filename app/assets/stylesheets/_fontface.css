@@ -1,0 +1,38 @@
+@font-face {
+    font-family: 'FS Elliot';
+    src: font-url('decidim/FSElliot/FSElliot-Light.eot');
+    src: font-url('decidim/FSElliot/FSElliot-Light.eot?#iefix') format('embedded-opentype'),
+        font-url('decidim/FSElliot/FSElliot-Light.woff2') format('woff2'),
+        font-url('decidim/FSElliot/FSElliot-Light.woff') format('woff'),
+        font-url('decidim/FSElliot/FSElliot-Light.ttf') format('truetype'),
+        font-url('decidim/FSElliot/FSElliot-Light.svg#FSElliot-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FS Elliot';
+    src: font-url('decidim/FSElliot/FSElliot-Bold.eot');
+    src: font-url('decidim/FSElliot/FSElliot-Bold.eot?#iefix') format('embedded-opentype'),
+        font-url('decidim/FSElliot/FSElliot-Bold.woff2') format('woff2'),
+        font-url('decidim/FSElliot/FSElliot-Bold.woff') format('woff'),
+        font-url('decidim/FSElliot/FSElliot-Bold.ttf') format('truetype'),
+        font-url('decidim/FSElliot/FSElliot-Bold.svg#FSElliot-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FS Elliot';
+    src: font-url('decidim/FSElliot/FSElliot.eot');
+    src: font-url('decidim/FSElliot/FSElliot.eot?#iefix') format('embedded-opentype'),
+        font-url('decidim/FSElliot/FSElliot.woff2') format('woff2'),
+        font-url('decidim/FSElliot/FSElliot.woff') format('woff'),
+        font-url('decidim/FSElliot/FSElliot.ttf') format('truetype'),
+        font-url('decidim/FSElliot/FSElliot.svg#FSElliot') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

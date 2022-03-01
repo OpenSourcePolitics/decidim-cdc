@@ -1,0 +1,9 @@
+<% add_decidim_page_title(t("devise.sessions.new.sign_in")) %>
+
+<div class="wrapper">
+  <div class="row collapse">
+    <% cache current_organization do %>
+      <%= render "decidim/devise/shared/omniauth_buttons" %>
+    <% end %>
+  </div>
+</div>

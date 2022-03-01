@@ -59,6 +59,10 @@ en:
           actions:
             osp_authorization_handler: Verify with the identity verification form
             osp_authorization_workflow: Verify with the identity verification form
+  devise:
+    registrations:
+      force_sso_for_admin: You must use external authentification to sign in as an administrator
+      user_not_admin: You must be a platform administrator to be able to log in with an external account
   faker:
     address:
       country_code:

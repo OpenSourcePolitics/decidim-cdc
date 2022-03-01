@@ -59,6 +59,10 @@ fr:
           actions:
             osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
             osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
+  devise:
+    registrations:
+      force_sso_for_admin: Vous devez utiliser l'authentification externe pour vous connecter en tant qu'administrateur
+      user_not_admin: Vous devez être administrateur de la plateforme pour vous connecter de cette façon
   faker:
     address:
       country_code:

@@ -82,7 +82,23 @@ translation:
 
 # Do not consider these keys missing:
 ignore_missing:
- - faker.*
+  - faker.*
+  - decidim.devise.omniauth_registrations.create.email_already_exists
+  - decidim.devise.registrations.new.*
+  - decidim.devise.sessions.new.*
+  - decidim.shared.login_modal.close_modal 
+  - decidim.shared.login_modal.please_sign_in
+  - decidim.shared.login_modal.sign_up 
+  - devise.mailer.invitation_instructions.accept 
+  - devise.mailer.invitation_instructions.accept_until 
+  - devise.mailer.invitation_instructions.hello
+  - devise.mailer.invitation_instructions.ignore 
+  - devise.mailer.invitation_instructions.invited_you_as_admin 
+  - devise.mailer.invitation_instructions.someone_invited_you_as_admin 
+  - devise.registrations.new.sign_up 
+  - devise.sessions.new.sign_in
+  - devise.shared.links.forgot_your_password 
+  - devise.shared.links.sign_in_with_provider
 
 # Consider these keys used:
 ignore_unused:

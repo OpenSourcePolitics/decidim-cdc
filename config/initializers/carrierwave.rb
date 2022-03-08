@@ -9,9 +9,9 @@ unless Rails.env.development? || Rails.env.test?
       config.storage = :file
       config.enable_processing = !Rails.env.test?
     else
-      config.fog_provider = 'fog/aws'
+      config.fog_provider = "fog/aws"
       config.fog_credentials = {
-        provider: 'AWS',
+        provider: "AWS",
         aws_access_key_id: Rails.application.secrets.dig(:scaleway, :id),
         aws_secret_access_key: Rails.application.secrets.dig(:scaleway, :token),
         aws_signature_version: 4,
@@ -26,14 +26,12 @@ unless Rails.env.development? || Rails.env.test?
       # config.fog_public = false # optional, defaults to true
       config.fog_directory = Rails.application.secrets.dig(:scaleway, :bucket_name)
       config.fog_attributes = {
-        'Cache-Control' => "max-age=#{365.day.to_i}",
-        'X-Content-Type-Options' => "nosniff"
+        "Cache-Control" => "max-age=#{365.days.to_i}",
+        "X-Content-Type-Options" => "nosniff"
       }
     end
     # This needs to be set for correct attachment file URLs in emails
     # DON'T FORGET to ALSO set this in `config/application.rb`
-    if Rails.application.secrets.dig(:asset, :host).present?
-      config.asset_host = Rails.application.secrets.dig(:asset, :host)
-    end
+    config.asset_host = Rails.application.secrets.dig(:asset, :host) if Rails.application.secrets.dig(:asset, :host).present?
   end
 end

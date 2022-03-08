@@ -20,9 +20,7 @@ module DevelopmentApp
 
     # This needs to be set for correct images URLs in emails
     # DON'T FORGET to ALSO set this in `config/initializers/carrierwave.rb`
-    if Rails.application.secrets.dig(:asset, :host).present?
-      config.action_mailer.asset_host = Rails.application.secrets.dig(:asset, :host)
-    end
+    config.action_mailer.asset_host = Rails.application.secrets.dig(:asset, :host) if Rails.application.secrets.dig(:asset, :host).present?
 
     config.backup = config_for(:backup).deep_symbolize_keys
 

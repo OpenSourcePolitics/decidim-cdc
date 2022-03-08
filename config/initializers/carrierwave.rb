@@ -32,6 +32,6 @@ unless Rails.env.development? || Rails.env.test?
     end
     # This needs to be set for correct attachment file URLs in emails
     # DON'T FORGET to ALSO set this in `config/application.rb`
-    config.asset_host = Rails.application.secrets.dig(:asset, :host) if Rails.application.secrets.dig(:asset, :host).present?
+      config.asset_host = "https://#{Rails.application.secrets[:asset_host]}/" if Rails.application.secrets[:asset_host].present?
   end
 end

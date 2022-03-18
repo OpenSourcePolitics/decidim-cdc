@@ -2,6 +2,19 @@
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
+class RandomStalling < Devise::FailureApp
+  def respond
+    sleep rand * 5
+    super
+  end
+
+  protected
+
+  def i18n_options(options)
+    options[:locale] = session[:user_locale]
+    super
+  end
+end
 
 Devise.setup do |config|
   # ==> Configuration for :confirmable

@@ -8857,6 +8857,8 @@
     "webpack-merge" "^5.7.3"
 
 "webpack-combine-loaders@2.0.4":
+  "integrity" "sha512-5O5PYVE5tZ3I3uUm3QB7niLEJzLketl8hvAcJwa4YmwNWS/vixfVsqhtUaBciP8J4u/GwIHV52d7kkgZJFvDnw=="
+  "resolved" "https://registry.npmjs.org/webpack-combine-loaders/-/webpack-combine-loaders-2.0.4.tgz"
   "version" "2.0.4"
   dependencies:
     "qs" "^6.5.2"

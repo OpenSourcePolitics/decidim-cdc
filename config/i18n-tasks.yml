@@ -99,6 +99,7 @@ ignore_missing:
   - devise.sessions.new.sign_in
   - devise.shared.links.forgot_your_password 
   - devise.shared.links.sign_in_with_provider
+  - layouts.decidim.header.user_menu
 
 # Consider these keys used:
 ignore_unused:
@@ -113,3 +114,4 @@ ignore_unused:
   - decidim.verifications.authorizations.first_login.actions.osp_authorization_handler
   - decidim.verifications.authorizations.first_login.actions.osp_authorization_workflow
   - layouts.decidim.user_menu.account
+  - layouts.decidim.footer.*

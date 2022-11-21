@@ -16,13 +16,13 @@ gem "bootsnap", "~> 1.4"
 
 gem "dotenv-rails"
 
-gem "puma", ">= 5.5.1"
 gem "faker", "~> 2.14"
+gem "puma", ">= 5.5.1"
 
-gem "uglifier", "~> 4.1"
-gem "ruby-progressbar"
 gem "letter_opener_web", "~> 1.3"
+gem "ruby-progressbar"
 gem "sprockets", "~> 3.7"
+gem "uglifier", "~> 4.1"
 
 gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
 gem "fog-aws"

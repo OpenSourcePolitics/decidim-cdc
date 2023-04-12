@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/OpenSourcePolitics/omniauth-publik
-  revision: ab703a565c402b773ce0025593554b329f603e5c
-  specs:
-    omniauth-publik (0.1.1)
-      omniauth (~> 2.0)
-      omniauth-oauth2 (>= 1.7.2, < 2.0)
-
-GIT
   remote: https://github.com/decidim/decidim.git
   revision: 7ac30fbeeaaf111b14ef29fb56ec4e9118f6de59
   branch: release/0.26-stable
@@ -884,7 +876,6 @@ DEPENDENCIES
   listen (~> 3.1)
   lograge
   newrelic_rpm
-  omniauth-publik!
   passenger
   puma (>= 5.5.1)
   rubocop-faker

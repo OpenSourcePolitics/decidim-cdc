@@ -39,13 +39,6 @@ en:
           email_outro: You have received this notification because you are participating in "%{participatory_space_title}"
           email_subject: Your vote is still pending in %{participatory_space_title}
           notification_title: The vote on budget <a href="%{resource_path}">%{resource_title}</a> is still waiting for your confirmation in %{participatory_space_title}
-    system:
-      organizations:
-        omniauth_settings:
-          publik:
-            client_id: Client ID
-            client_secret: Client secret
-            site_url: Site URL
     verifications:
       authorizations:
         first_login:

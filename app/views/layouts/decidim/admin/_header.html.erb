@@ -1,0 +1,10 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<%= csrf_meta_tags %>
+<%= stylesheet_pack_tag "decidim_admin", media: "all" %>
+<%= javascript_pack_tag "decidim_admin", defer: false %>
+<%= organization_colors %>
+<%= snippets.display(:head) %>
+
+<%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>
+<%= javascript_pack_tag "decidim_decidim_awesome" %>
+<%= javascript_pack_tag "decidim_decidim_awesome_custom_fields" if awesome_proposal_custom_fields %>

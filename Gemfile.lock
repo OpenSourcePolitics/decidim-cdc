@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/omniauth-publik
+  revision: ab703a565c402b773ce0025593554b329f603e5c
+  specs:
+    omniauth-publik (0.1.1)
+      omniauth (~> 2.0)
+      omniauth-oauth2 (>= 1.7.2, < 2.0)
+
+GIT
   remote: https://github.com/decidim/decidim.git
   revision: 7ac30fbeeaaf111b14ef29fb56ec4e9118f6de59
   branch: release/0.26-stable
@@ -172,6 +180,15 @@ GIT
     decidim-verifications (0.26.3)
       decidim-core (= 0.26.3)
 
+GIT
+  remote: https://github.com/mainio/decidim-module-term_customizer.git
+  revision: f0d720710822f1231ea249dd71f978143d38a6c4
+  branch: release/0.26-stable
+  specs:
+    decidim-term_customizer (0.26.0)
+      decidim-admin (~> 0.26.0)
+      decidim-core (~> 0.26.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -324,6 +341,10 @@ GEM
     db-query-matchers (0.10.0)
       activesupport (>= 4.0, < 7)
       rspec (~> 3.0)
+    decidim-decidim_awesome (0.8.3)
+      decidim-admin (>= 0.25.0, < 0.27)
+      decidim-core (>= 0.25.0, < 0.27)
+      sassc (~> 2.3)
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
     declarative-option (0.1.0)
@@ -725,6 +746,8 @@ GEM
     rubyzip (2.3.2)
     rufus-scheduler (3.8.0)
       fugit (~> 1.1, >= 1.1.6)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     searchlight (4.1.0)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
@@ -851,7 +874,9 @@ DEPENDENCIES
   byebug (~> 11.0)
   dalli
   decidim!
+  decidim-decidim_awesome (~> 0.8.3)
   decidim-dev!
+  decidim-term_customizer!
   dotenv-rails
   faker (~> 2.14)
   fog-aws
@@ -859,6 +884,7 @@ DEPENDENCIES
   listen (~> 3.1)
   lograge
   newrelic_rpm
+  omniauth-publik!
   passenger
   puma (>= 5.5.1)
   rubocop-faker

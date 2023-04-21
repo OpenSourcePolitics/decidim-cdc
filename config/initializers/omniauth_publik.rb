@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+return unless defined?(Omniauth::Strategies::Publik)
+
 if Rails.application.secrets.dig(:omniauth, :publik).present?
   Rails.application.config.middleware.use OmniAuth::Builder do
     provider(

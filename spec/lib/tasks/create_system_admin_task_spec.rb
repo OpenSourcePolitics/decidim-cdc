@@ -7,6 +7,8 @@ describe "rake decidim_app:create_system_admin", type: :task do
 
   before do
     allow(Decidim::SystemAdminCreator).to receive(:create!).with(ENV).and_return(true)
+
+    Rake::Task[task_cmd].reenable
   end
 
   it "invokes the admin creator" do

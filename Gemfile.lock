@@ -310,6 +310,7 @@ GEM
     chef-utils (18.2.7)
       concurrent-ruby
     childprocess (3.0.0)
+    climate_control (1.2.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     coffee-rails (5.0.0)
@@ -855,6 +856,7 @@ DEPENDENCIES
   bootsnap (~> 1.4)
   brakeman (~> 5.1)
   byebug (~> 11.0)
+  climate_control (~> 1.2)
   dalli
   decidim!
   decidim-decidim_awesome (~> 0.8.3)

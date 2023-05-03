@@ -12,6 +12,6 @@ describe "rake decidim_app:create_system_admin", type: :task do
   end
 
   it "invokes the admin creator" do
-    expect { Rake::Task[task_cmd].invoke }.to output("System admin created successfully\n").to_stdout
+    expect { Rake::Task[task_cmd].execute }.to output("System admin created successfully\n").to_stdout
   end
 end

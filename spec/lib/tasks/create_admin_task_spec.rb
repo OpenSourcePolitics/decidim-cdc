@@ -6,8 +6,6 @@ describe "rake decidim_app:create_admin", type: :task do
 
   before do
     allow(Decidim::AdminCreator).to receive(:create!).with(ENV).and_return(true)
-
-    task.reenable
   end
 
   it "preloads the Rails environment" do

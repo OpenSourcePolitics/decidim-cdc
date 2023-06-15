@@ -25,8 +25,5 @@ module DevelopmentApp
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-
-    # TODO: remove this line after testing
-    config.hosts << "56ca-2a04-ee41-84-d142-2c-34ce-7dca-d6e4.ngrok-free.app"
   end
 end

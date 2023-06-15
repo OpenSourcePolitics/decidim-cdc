@@ -98,19 +98,19 @@ module Decidim
 
             expect(ActiveSupport::Notifications)
               .to receive(:publish)
-                    .with(
-                      "decidim.user.omniauth_registration",
-                      user_id: user.id,
-                      identity_id: 1234,
-                      provider: provider,
-                      uid: uid,
-                      email: email,
-                      name: "Facebook User",
-                      nickname: "facebook_user",
-                      avatar_url: "http://www.example.com/foo.jpg",
-                      admin: false,
-                      raw_data: {}
-                    )
+              .with(
+                "decidim.user.omniauth_registration",
+                user_id: user.id,
+                identity_id: 1234,
+                provider: provider,
+                uid: uid,
+                email: email,
+                name: "Facebook User",
+                nickname: "facebook_user",
+                avatar_url: "http://www.example.com/foo.jpg",
+                admin: false,
+                raw_data: {}
+              )
             command.call
           end
 
@@ -144,19 +144,19 @@ module Decidim
 
               expect(ActiveSupport::Notifications)
                 .to receive(:publish)
-                      .with(
-                        "decidim.user.omniauth_registration",
-                        user_id: user.id,
-                        identity_id: 1234,
-                        provider: provider,
-                        uid: uid,
-                        email: email,
-                        name: "Facebook User",
-                        nickname: "facebook_user",
-                        avatar_url: "http://www.example.com/foo.jpg",
-                        admin: true,
-                        raw_data: raw_data
-                      )
+                .with(
+                  "decidim.user.omniauth_registration",
+                  user_id: user.id,
+                  identity_id: 1234,
+                  provider: provider,
+                  uid: uid,
+                  email: email,
+                  name: "Facebook User",
+                  nickname: "facebook_user",
+                  avatar_url: "http://www.example.com/foo.jpg",
+                  admin: true,
+                  raw_data: raw_data
+                )
               command.call
             end
           end

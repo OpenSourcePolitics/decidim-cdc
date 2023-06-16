@@ -15,7 +15,6 @@ module OmniAuth
 
         hash_attributes["name"] = "#{hash_attributes["first_name"]} #{hash_attributes["last_name"]}"
         hash_attributes["nickname"] = hash_attributes["first_name"]
-        hash_attributes["admin"] = true
 
         hash_attributes
       end

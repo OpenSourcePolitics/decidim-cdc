@@ -3,6 +3,11 @@
 module Decidim
   module Devise
     class CustomOmniauthRegistrationsController < ::Decidim::Devise::OmniauthRegistrationsController
+      # rubocop:disable Rails/LexicallyScopedActionFilter
+      skip_before_action :verify_authenticity_token, only: [:cdcsaml]
+      skip_after_action :verify_same_origin_request, only: [:cdcsaml]
+      # rubocop:enable Rails/LexicallyScopedActionFilter
+
       include Decidim::AuthentificationHelper
 
       def create

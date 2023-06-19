@@ -27,6 +27,8 @@ gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
 gem "fog-aws"
 gem "sys-filesystem"
 
+gem "omniauth-saml"
+
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
   gem "climate_control", "~> 1.2"

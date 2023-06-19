@@ -77,3 +77,4 @@ git-status.txt
 # Ignore RSpec failures
 .rspec-failurespackages/
 public/decidim-packs
+public/packs-test

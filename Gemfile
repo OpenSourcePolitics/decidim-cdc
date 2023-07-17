@@ -24,6 +24,7 @@ gem "sprockets", "~> 3.7"
 gem "uglifier", "~> 4.1"
 
 gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
+gem "aws-sdk-s3", require: false
 gem "fog-aws"
 gem "sys-filesystem"
 

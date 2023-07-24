@@ -9,6 +9,8 @@ fr:
       participatory_process:
         private_space: Espace privé
   decidim:
+    accessibility:
+      skip_button: Skip button
     admin:
       participatory_space_private_users:
         create:
@@ -53,6 +55,9 @@ fr:
             osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
             osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
   devise:
+    registrations:
+      force_sso_for_admin: You must use external authentification to sign in as an administrator
+      user_not_admin: You must be a platform administrator to be able to log in with an external account
     sessions:
       new:
         sign_in: S'identifier
@@ -76,7 +81,17 @@ fr:
   layouts:
     decidim:
       footer:
+        download_open_data: Open data
         made_with_open_source: Site réalisé par <a target="_blank" href="https://opensourcepolitics.eu">Open Source Politics</a> grâce au <a target="_blank" href="https://github.com/decidim/decidim">logiciel libre Decidim</a>.
+      header:
+        close_menu: Close menu
+        navigation: Navigation
+        sign_in: Sign in
+        sign_up: Sign up
+      user_menu:
+        account: Account
+        conversations: Conversations
+        notifications: Notifications
   rack_attack:
     too_many_requests:
       message: Il semblerait que vous fassiez trop de requetes sur notre serveur, votre connexion a ete ralentie.

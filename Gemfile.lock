@@ -897,6 +897,7 @@ DEPENDENCIES
   puma (>= 5.5.1)
   rack-attack (~> 6.6)
   rubocop-faker
+  ruby-progressbar (~> 1.11)
   sendgrid-ruby
   sentry-rails
   sentry-ruby

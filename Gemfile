@@ -33,8 +33,8 @@ gem "nokogiri", "1.13.4"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "puma", ">= 5.5.1"
 gem "rack-attack", "~> 6.6"
-gem "sys-filesystem"
 gem "ruby-progressbar", "~> 1.11"
+gem "sys-filesystem"
 
 group :development do
   gem "letter_opener_web", "~> 1.3"

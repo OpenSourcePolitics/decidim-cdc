@@ -13,6 +13,11 @@ module OmniAuth
              digest_method: XMLSecurity::Document::SHA256,
              signature_method: XMLSecurity::Document::RSA_SHA256
 
+      option :attribute_statements,
+             first_name: ["givenname", "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"],
+             last_name: ["surname", "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"],
+             email: ["emailaddress", "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
+
       info do
         found_attributes = options.attribute_statements.map do |key, values|
           attribute = find_attribute_by(values)
@@ -22,7 +27,9 @@ module OmniAuth
         hash_attributes = Hash[found_attributes]
 
         hash_attributes["name"] = "#{hash_attributes["first_name"]} #{hash_attributes["last_name"]}"
-        hash_attributes["nickname"] = hash_attributes["first_name"]
+
+        hash_attributes["name"] = uid.split("@").first if hash_attributes["name"].blank?
+        hash_attributes["email"] = uid if hash_attributes["email"].blank?
 
         hash_attributes
       end

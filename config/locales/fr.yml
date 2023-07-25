@@ -10,7 +10,7 @@ fr:
         private_space: Espace privé
   decidim:
     accessibility:
-      skip_button: Skip button
+      skip_button: Passer au contenu principal
     admin:
       participatory_space_private_users:
         create:
@@ -56,8 +56,8 @@ fr:
             osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
   devise:
     registrations:
-      force_sso_for_admin: You must use external authentification to sign in as an administrator
-      user_not_admin: You must be a platform administrator to be able to log in with an external account
+      force_sso_for_admin: Vous devez utiliser l'authentification externe pour vous connecter en tant qu'administrateur
+      user_not_admin: Vous devez être administrateur de la plateforme pour vous connecter de cette façon
     sessions:
       new:
         sign_in: S'identifier
@@ -81,15 +81,15 @@ fr:
   layouts:
     decidim:
       footer:
-        download_open_data: Open data
+        download_open_data: Données ouvertes
         made_with_open_source: Site réalisé par <a target="_blank" href="https://opensourcepolitics.eu">Open Source Politics</a> grâce au <a target="_blank" href="https://github.com/decidim/decidim">logiciel libre Decidim</a>.
       header:
-        close_menu: Close menu
+        close_menu: Fermer
         navigation: Navigation
-        sign_in: Sign in
-        sign_up: Sign up
+        sign_in: Se connecter
+        sign_up: S'inscrire
       user_menu:
-        account: Account
+        account: Mon compte
         conversations: Conversations
         notifications: Notifications
   rack_attack:

@@ -18,10 +18,9 @@ Rails.application.config.middleware.use OmniAuth::Builder do
                                  certificate: :idp_cert,
                                  private_key: :idp_key,
                                  issuer: :issuer,
-                                 authn_context: :authn_context,
                                  assertion_consumer_service_url: :assertion_consumer_service_url,
-                                 idp_sso_target_url: :idp_sso_target_url,
-                                 idp_slo_target_url: :idp_slo_target_url)
+                                 idp_sso_service_url: :idp_sso_service_url,
+                                 idp_slo_service_url: :idp_slo_service_url)
     )
   end
 end

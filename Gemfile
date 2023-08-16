@@ -32,12 +32,15 @@ gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rail
 gem "nokogiri", "1.13.4"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "puma", ">= 5.5.1"
+
+gem "letter_opener_web", "~> 1.3"
 gem "rack-attack", "~> 6.6"
 gem "ruby-progressbar", "~> 1.11"
+gem "sprockets", "~> 3.7"
 gem "sys-filesystem"
+gem "uglifier", "~> 4.1"
 
 group :development do
-  gem "letter_opener_web", "~> 1.3"
   gem "listen", "~> 3.1"
   gem "rubocop-faker"
   gem "spring", "~> 2.0"

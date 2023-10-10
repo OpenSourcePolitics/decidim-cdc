@@ -100,7 +100,6 @@ ignore_missing:
   - devise.shared.links.forgot_your_password 
   - devise.shared.links.sign_in_with_provider
   - layouts.decidim.header.user_menu
-  - decidim.proposals.proposals.show.*
 
 # Consider these keys used:
 ignore_unused:

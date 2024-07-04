@@ -19,7 +19,8 @@ Bundler.require(*Rails.groups)
 module DevelopmentApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults 6.0
+    config.autoloader = :zeitwerk
     config.time_zone = "Europe/Paris" unless Rails.env.test?
     config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml").to_s]
 
@@ -47,6 +48,13 @@ module DevelopmentApp
     config.after_initialize do
       Decidim::GraphiQL::Rails.config.tap do |config|
         config.initial_query = "{\n  deployment {\n    version\n    branch\n    remote\n    upToDate\n    currentCommit\n    latestCommit\n    locallyModified\n  }\n}".html_safe
+      end
+    end
+
+    if ENV.fetch("RAILS_SESSION_STORE", "") == "active_record"
+      initializer "session cookie domain", after: "Expire sessions" do
+        Rails.application.config.session_store :active_record_store, key: "_decidim_session", expire_after: Decidim.config.expire_session_after
+        ActiveRecord::SessionStore::Session.serializer = :hybrid
       end
     end
   end

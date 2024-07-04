@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-DECIDIM_VERSION = "0.26"
+DECIDIM_VERSION = "0.27"
 DECIDIM_BRANCH = "release/#{DECIDIM_VERSION}-stable"
 
 ruby RUBY_VERSION
@@ -15,9 +15,9 @@ gem "decidim", "~> #{DECIDIM_VERSION}.0"
 
 # External Decidim gems
 gem "decidim-cache_cleaner"
-gem "decidim-decidim_awesome"
+gem "decidim-decidim_awesome", "~> 0.9.1"
 gem "decidim-spam_detection"
-gem "decidim-term_customizer", git: "https://github.com/armandfardeau/decidim-module-term_customizer.git", branch: "fix/precompile-on-docker-0.26"
+gem "decidim-term_customizer", git: "https://github.com/opensourcepolitics/decidim-module-term_customizer.git", branch: "fix/multi-threading-compliant"
 
 # Omniauth gems
 gem "omniauth-saml"
@@ -35,8 +35,9 @@ gem "puma", ">= 5.5.1"
 
 gem "letter_opener_web", "~> 1.3"
 gem "rack-attack", "~> 6.6"
-gem "ruby-progressbar", "~> 1.11"
-gem "sprockets", "~> 3.7"
+gem "sidekiq", "~> 6.0"
+gem "sidekiq_alive", "~> 2.2"
+gem "sidekiq-scheduler", "~> 5.0"
 gem "sys-filesystem"
 gem "uglifier", "~> 4.1"
 
@@ -64,7 +65,4 @@ group :production do
   gem "sentry-rails"
   gem "sentry-ruby"
   gem "sentry-sidekiq"
-  gem "sidekiq", "~> 6.0"
-  gem "sidekiq_alive", "~> 2.2"
-  gem "sidekiq-scheduler", "~> 5.0"
 end

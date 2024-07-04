@@ -24,7 +24,7 @@ module OmniAuth
           [key, attribute]
         end
 
-        hash_attributes = Hash[found_attributes]
+        hash_attributes = found_attributes.to_h
 
         hash_attributes["name"] = "#{hash_attributes["first_name"]} #{hash_attributes["last_name"]}"
 

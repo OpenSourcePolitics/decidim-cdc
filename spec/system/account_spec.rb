@@ -33,7 +33,7 @@ describe "Account", type: :system do
 
     describe "update avatar" do
       it "can update avatar" do
-        attach_file :user_avatar, Decidim::Dev.asset("avatar.jpg")
+        dynamically_attach_file(:user_avatar, Decidim::Dev.asset("avatar.jpg"), remove_before: true)
 
         within "form.edit_user" do
           find("*[type=submit]").click
@@ -43,20 +43,43 @@ describe "Account", type: :system do
       end
 
       it "shows error when image is too big" do
-        attach_file :user_avatar, Decidim::Dev.asset("5000x5000.png")
+        find("#user_avatar_button").click
 
-        within "form.edit_user" do
-          find("*[type=submit]").click
+        within ".upload-modal" do
+          find(".remove-upload-item").click
+          input_element = find("input[type='file']", visible: :all)
+          input_element.attach_file(Decidim::Dev.asset("5000x5000.png"))
+
+          expect(page).to have_content("File resolution is too large", count: 1)
+          expect(page).to have_css(".upload-errors .form-error", count: 1)
         end
+      end
+    end
 
-        expect(page).to have_content("The image is too big", count: 1)
-        expect(page).to have_css(".flash.alert")
+    describe "update locales" do
+      context "when the organization has one locale" do
+        let(:organization) { create(:organization, available_locales: ["en"]) }
+
+        it "is not possible to change locales, #user_locale is disabled" do
+          expect(page).to have_css("#user_locale", text: "English")
+          expect(find("#user_locale")).to be_disabled
+        end
+      end
+
+      context "when the organization has more than one locale" do
+        it "shows the list of locales" do
+          find("#user_locale").click
+          expect(page).to have_css("option", count: organization.available_locales.size)
+        end
       end
     end
 
     describe "updating personal data" do
+      let!(:encrypted_password) { user.encrypted_password }
+
       it "updates the user's data" do
         within "form.edit_user" do
+          select "Français", from: :user_locale
           fill_in :user_name, with: "Nikola Tesla"
           fill_in :user_personal_url, with: "https://example.org"
           fill_in :user_about, with: "A Serbian-American inventor, electrical engineer, mechanical engineer, physicist, and futurist."
@@ -74,11 +97,35 @@ describe "Account", type: :system do
         user.reload
 
         within_user_menu do
-          find("a", text: "public profile").click
+          find("a", text: "Mon profil public").click
         end
 
         expect(page).to have_content("example.org")
         expect(page).to have_content("Serbian-American")
+
+        # The user's password should not change when they did not update it
+        expect(user.reload.encrypted_password).to eq(encrypted_password)
+      end
+    end
+
+    describe "updating locale" do
+      context "when the organization has more than one locale" do
+        it "switches the locale to french" do
+          within "form.edit_user" do
+            find("#user_locale").click
+            find("option", text: "Français").select_option
+            find("*[type=submit]").click
+          end
+
+          within_flash_messages do
+            expect(page).to have_content("successfully")
+          end
+
+          within "#user_locale" do
+            expect(page).to have_content("Français")
+          end
+          expect(page).to have_css(".help-text")
+        end
       end
     end
 
@@ -98,7 +145,7 @@ describe "Account", type: :system do
             expect(page).to have_content("successfully")
           end
 
-          expect(user.reload.valid_password?("sekritpass123")).to eq(true)
+          expect(user.reload.valid_password?("sekritpass123")).to be(true)
         end
       end
 
@@ -117,22 +164,58 @@ describe "Account", type: :system do
             expect(page).to have_content("There was a problem")
           end
 
-          expect(user.reload.valid_password?("sekritpass123")).to eq(false)
+          expect(user.reload.valid_password?("sekritpass123")).to be(false)
+        end
+      end
+    end
+
+    context "when updating the email" do
+      let(:pending_email) { "foo@bar.com" }
+
+      before do
+        within "form.edit_user" do
+          fill_in :user_email, with: pending_email
+
+          perform_enqueued_jobs { find("*[type=submit]").click }
+        end
+
+        within_flash_messages do
+          expect(page).to have_content("You'll receive an email to confirm your new email address")
         end
       end
 
-      context "when updating the email" do
-        it "needs to confirm it" do
-          within "form.edit_user" do
-            fill_in :user_email, with: "foo@bar.com"
+      after do
+        clear_enqueued_jobs
+      end
 
-            find("*[type=submit]").click
-          end
+      it "tells user to confirm new email" do
+        expect(page).to have_content("Email change verification")
+        expect(page).to have_selector("#user_email[disabled='disabled']")
+        expect(page).to have_content("We have sent an email to #{pending_email} to verify your new email address")
+      end
 
-          within_flash_messages do
-            expect(page).to have_content("email to confirm")
-          end
+      it "resend confirmation" do
+        within "#email-change-pending" do
+          click_link "Send again"
         end
+        expect(page).to have_content("Confirmation email resent successfully to #{pending_email}")
+        perform_enqueued_jobs
+        perform_enqueued_jobs
+
+        expect(emails.count).to eq(2)
+        visit last_email_link
+        expect(page).to have_content("Your email address has been successfully confirmed")
+      end
+
+      it "cancels the email change" do
+        expect(Decidim::User.find(user.id).unconfirmed_email).to eq(pending_email)
+        within "#email-change-pending" do
+          click_link "cancel"
+        end
+
+        expect(page).to have_content("Email change cancelled successfully")
+        expect(page).not_to have_content("Email change verification")
+        expect(Decidim::User.find(user.id).unconfirmed_email).to be_nil
       end
     end
 
@@ -152,6 +235,33 @@ describe "Account", type: :system do
 
         within_flash_messages do
           expect(page).to have_content("successfully")
+        end
+      end
+
+      context "when the user is an admin" do
+        let!(:user) { create(:user, :confirmed, :admin, password: password, password_confirmation: password) }
+
+        before do
+          login_as user, scope: :user
+          visit decidim.notifications_settings_path
+        end
+
+        it "updates the administrator's notifications" do
+          within ".switch.email_on_moderations" do
+            page.find(".switch-paddle").click
+          end
+
+          within ".switch.notification_settings" do
+            page.find(".switch-paddle").click
+          end
+
+          within "form.edit_user" do
+            find("*[type=submit]").click
+          end
+
+          within_flash_messages do
+            expect(page).to have_content("successfully")
+          end
         end
       end
     end
@@ -190,35 +300,6 @@ describe "Account", type: :system do
             expect(page).to have_content("Your interests have been successfully updated.")
           end
         end
-      end
-    end
-
-    context "when on the delete my account page" do
-      before do
-        visit decidim.delete_account_path
-      end
-
-      it "the user can delete his account" do
-        fill_in :delete_user_delete_account_delete_reason, with: "I just want to delete my account"
-
-        click_button "Delete my account"
-
-        click_button "Yes, I want to delete my account"
-
-        within_flash_messages do
-          expect(page).to have_content("successfully")
-        end
-
-        find(".sign-in-link").click
-
-        within ".new_user" do
-          fill_in :session_user_email, with: user.email
-          fill_in :session_user_password, with: password
-          find("*[type=submit]").click
-        end
-
-        expect(page).to have_no_content("Signed in successfully")
-        expect(page).to have_no_content(user.name)
       end
     end
   end

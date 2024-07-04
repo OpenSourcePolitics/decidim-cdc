@@ -42,6 +42,10 @@ ENV RAILS_ENV=production \
 
 RUN apt update && \
     apt install -y postgresql-client imagemagick libproj-dev proj-bin libjemalloc2 && \
+    curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get install -y npm && \
+    npm install --global yarn && \
     gem install bundler:2.4.9
 
 WORKDIR /app

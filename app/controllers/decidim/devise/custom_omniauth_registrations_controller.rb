@@ -46,6 +46,16 @@ module Decidim
           end
         end
       end
+
+      def after_sign_in_path_for(user)
+        if user.present? && user.blocked?
+          check_user_block_status(user)
+        elsif !pending_redirect?(user) && can_access_admin?(user)
+          "/admin"
+        else
+          super
+        end
+      end
     end
   end
 end

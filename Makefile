@@ -6,7 +6,7 @@ up: build
 	@make setup-database
 
 build:
-	docker build . -f Dockerfile.local -t decidim-app:latest
+	docker build . -f Dockerfile.local -t decidim-cdc:latest
 
 # Stops containers and remove volumes
 teardown:
@@ -50,5 +50,5 @@ external:
 
 rebuild:
 	docker-compose -f docker-compose.local.yml down
-	docker volume rm decidim-app_shared-volume || true
+	docker volume rm decidim-cdc_shared-volume || true
 	@make up

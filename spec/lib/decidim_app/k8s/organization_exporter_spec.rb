@@ -22,7 +22,7 @@ describe DecidimApp::K8s::OrganizationExporter do
     }
   end
 
-  let(:database_name) { Rails.configuration.database_configuration[Rails.env]["database"] }
+  let(:database_configuration) { Rails.configuration.database_configuration[Rails.env].deep_symbolize_keys }
 
   before do
     organization.update!(secondary_hosts: [organization_secondary_host])
@@ -32,10 +32,8 @@ describe DecidimApp::K8s::OrganizationExporter do
 
   describe ".export!" do
     it "calls the right methods" do
-      # rubocop:disable RSpec/AnyInstance
-      expect_any_instance_of(described_class).to receive(:export!)
+      expect(described_class).to receive(:export!)
       described_class.export!(organization, logger, export_path, image)
-      # rubocop:enable RSpec/AnyInstance
     end
   end
 
@@ -53,7 +51,16 @@ describe DecidimApp::K8s::OrganizationExporter do
   describe "#dumping_database" do
     it "dumps the database" do
       # rubocop:disable RSpec/SubjectStub
-      expect(subject).to receive(:system).with("pg_dump -Fc #{database_name} > #{export_path}/#{name_space}--#{hostname}/postgres/#{hostname}--de.dump")
+
+      cmd = "pg_dump -Fc"
+      cmd += " -h '#{database_configuration[:host]}'" if database_configuration[:host].present?
+      cmd += " -p '#{database_configuration[:port]}'" if database_configuration[:port].present?
+      cmd += " -U '#{database_configuration[:username]}'" if database_configuration[:username].present?
+      cmd = "PGPASSWORD=#{database_configuration[:password]} #{cmd}" if database_configuration[:password].present?
+      cmd += " -d '#{database_configuration[:database]}'" if database_configuration[:database].present?
+      cmd += " -f #{export_path}/#{name_space}--#{hostname}/postgres/#{hostname}--de.dump"
+
+      expect(subject).to receive(:system).with(cmd)
       # rubocop:enable RSpec/SubjectStub
       subject.dumping_database
     end
@@ -167,7 +174,7 @@ describe DecidimApp::K8s::OrganizationExporter do
     it "returns the organization columns" do
       expect(subject.organization_columns).to eq({
                                                    "available_authorizations" => [],
-                                                   "available_locales" => Decidim.available_locales.map(&:to_s),
+                                                   "available_locales" => %w(en fr),
                                                    "default_locale" => "en",
                                                    "file_upload_settings" => {
                                                      "allowed_content_types" => {
@@ -177,10 +184,11 @@ describe DecidimApp::K8s::OrganizationExporter do
                                                      "allowed_file_extensions" => {
                                                        "admin" => %w(jpg jpeg gif png bmp pdf doc docx xls xlsx ppt pptx ppx rtf txt odt ott odf otg ods ots),
                                                        "default" => %w(jpg jpeg gif png bmp pdf rtf txt),
-                                                       "image" => %w(jpg jpeg gif png bmp ico)
+                                                       "favicon" => %w(png),
+                                                       "image" => %w(jpg jpeg gif png bmp)
                                                      },
                                                      "maximum_file_size" => {
-                                                       "avatar" => 5, "default" => 10
+                                                       "avatar" => 5.0, "default" => 10.0
                                                      }
                                                    },
                                                    "force_users_to_authenticate_before_access_organization" => false,

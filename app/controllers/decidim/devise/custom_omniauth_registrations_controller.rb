@@ -9,7 +9,6 @@ module Decidim
       # rubocop:enable Rails/LexicallyScopedActionFilter
 
       include Decidim::AuthentificationHelper
-
       def create
         form_params = user_params_from_oauth_hash || params[:user]
 

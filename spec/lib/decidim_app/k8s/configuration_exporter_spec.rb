@@ -21,7 +21,7 @@ describe DecidimApp::K8s::ConfigurationExporter do
 
   describe "#export!" do
     it "exports the organizations" do
-      expect(DecidimApp::K8s::OrganizationExporter).to receive(:export!).with(organization, subject.instance_variable_get(:@logger), described_class::EXPORT_PATH, image).and_return(true)
+      allow(DecidimApp::K8s::OrganizationExporter).to receive(:export!).with(organization, subject.instance_variable_get(:@logger), described_class::EXPORT_PATH, image).and_return(true)
 
       subject.export!
     end
@@ -29,7 +29,7 @@ describe DecidimApp::K8s::ConfigurationExporter do
 
   describe "#dump_db!" do
     it "exports the organizations" do
-      expect(DecidimApp::K8s::OrganizationExporter).to receive(:dumping_database).with(organization, subject.instance_variable_get(:@logger), described_class::EXPORT_PATH).and_return(true)
+      allow(DecidimApp::K8s::OrganizationExporter).to receive(:dumping_database).with(organization, subject.instance_variable_get(:@logger), described_class::EXPORT_PATH).and_return(true)
 
       subject.dump_db
     end
@@ -37,20 +37,14 @@ describe DecidimApp::K8s::ConfigurationExporter do
 
   describe ".export!" do
     it "creates a new instance and calls export!" do
-      # rubocop:disable RSpec/AnyInstance
-      expect_any_instance_of(described_class).to receive(:export!)
-      # rubocop:enable RSpec/AnyInstance
-
+      expect(described_class).to receive(:export!)
       described_class.export!(image)
     end
   end
 
   describe ".dump_db" do
     it "creates a new instance and calls dumping_database!" do
-      # rubocop:disable RSpec/AnyInstance
-      expect_any_instance_of(described_class).to receive(:dump_db)
-      # rubocop:enable RSpec/AnyInstance
-
+      expect(described_class).to receive(:dump_db)
       described_class.dump_db
     end
   end

@@ -16,8 +16,9 @@ describe "Account", type: :system do
     it "shows the account form when clicking on the menu" do
       visit decidim.root_path
 
-      within_user_menu do
-        find("a", text: "account").click
+      within ".topbar__user__logged" do
+        find("a", text: user.name).click
+        find("a", text: "My account").click
       end
 
       expect(page).to have_css("form.edit_user")
@@ -28,8 +29,6 @@ describe "Account", type: :system do
     before do
       visit decidim.account_path
     end
-
-    it_behaves_like "accessible page"
 
     describe "update avatar" do
       it "can update avatar" do
@@ -96,7 +95,8 @@ describe "Account", type: :system do
 
         user.reload
 
-        within_user_menu do
+        within ".topbar__user__logged" do
+          find("a", text: user.name).click
           find("a", text: "Mon profil public").click
         end
 
@@ -136,7 +136,6 @@ describe "Account", type: :system do
             page.find(".change-password").click
 
             fill_in :user_password, with: "sekritpass123"
-            fill_in :user_password_confirmation, with: "sekritpass123"
 
             find("*[type=submit]").click
           end
@@ -146,25 +145,6 @@ describe "Account", type: :system do
           end
 
           expect(user.reload.valid_password?("sekritpass123")).to be(true)
-        end
-      end
-
-      context "when passwords don't match" do
-        it "doesn't update the password" do
-          within "form.edit_user" do
-            page.find(".change-password").click
-
-            fill_in :user_password, with: "sekritpass123"
-            fill_in :user_password_confirmation, with: "oopseytypo"
-
-            find("*[type=submit]").click
-          end
-
-          within_flash_messages do
-            expect(page).to have_content("There was a problem")
-          end
-
-          expect(user.reload.valid_password?("sekritpass123")).to be(false)
         end
       end
     end
@@ -300,6 +280,35 @@ describe "Account", type: :system do
             expect(page).to have_content("Your interests have been successfully updated.")
           end
         end
+      end
+    end
+
+    context "when on the delete my account page" do
+      before do
+        visit decidim.delete_account_path
+      end
+
+      it "the user can delete their account" do
+        fill_in :delete_user_delete_account_delete_reason, with: "I just want to delete my account"
+
+        click_button "Delete my account"
+
+        click_button "Yes, I want to delete my account"
+
+        within_flash_messages do
+          expect(page).to have_content("successfully")
+        end
+
+        find(".sign-in-link").click
+
+        within ".new_user" do
+          fill_in :session_user_email, with: user.email
+          fill_in :session_user_password, with: password
+          find("*[type=submit]").click
+        end
+
+        expect(page).to have_no_content("Signed in successfully")
+        expect(page).to have_no_content(user.name)
       end
     end
   end

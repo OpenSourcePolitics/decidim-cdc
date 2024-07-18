@@ -110,6 +110,7 @@ ignore_unused:
   - decidim.authorization_handlers.osp_authorization_handler.*
   - decidim.authorization_handlers.osp_authorization_workflow.*
   - decidim.amendments.emendation.announcement.evaluating
+  - decidim.devise.registrations.new.password_help
   - decidim.events.budgets.pending_order.*
   - decidim.verifications.authorizations.first_login.actions.osp_authorization_handler
   - decidim.verifications.authorizations.first_login.actions.osp_authorization_workflow

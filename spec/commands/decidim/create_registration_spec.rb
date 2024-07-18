@@ -125,7 +125,6 @@ module Decidim
               organization: organization,
               accepted_tos_version: organization.tos_version,
               newsletter_notifications_at: newsletter_notifications_at,
-              notifications_sending_frequency: notifications_sending_frequency,
               locale: form.current_locale,
               extended_data: {
                 country: country,

@@ -1,4 +1,5 @@
 GIT
+<<<<<<< HEAD
   remote: https://github.com/octree-gva/decidim-module-decidim_awesome.git
   revision: afa824a79faa42f99eee5c0dcb4944e3a78b4a1d
   branch: feat/awesome_decidim_private_fields
@@ -7,6 +8,13 @@ GIT
       decidim-admin (>= 0.26.0, < 0.28)
       decidim-core (>= 0.26.0, < 0.28)
       sassc (~> 2.3)
+=======
+  remote: https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git
+  revision: 1c91e024ae4467c097b39673e5d78b06afd206d1
+  specs:
+    decidim-friendly_signup (0.4.5)
+      decidim-core (~> 0.27)
+>>>>>>> master
 
 GIT
   remote: https://github.com/opensourcepolitics/decidim-module-term_customizer.git
@@ -944,6 +952,7 @@ DEPENDENCIES
   decidim-cache_cleaner
   decidim-decidim_awesome!
   decidim-dev (~> 0.27.0)
+  decidim-friendly_signup!
   decidim-spam_detection
   decidim-term_customizer!
   deface

@@ -19,15 +19,14 @@ describe "Authentication", type: :system do
         within ".new_user" do
           fill_in :registration_user_email, with: "user@example.org"
           fill_in :registration_user_name, with: "Responsible Citizen"
-          fill_in :registration_user_nickname, with: "responsible"
           fill_in :registration_user_password, with: "DfyvHn425mYAy2HL"
-          fill_in :registration_user_password_confirmation, with: "DfyvHn425mYAy2HL"
           check :registration_user_tos_agreement
           check :registration_user_newsletter
+
           find("*[type=submit]").click
         end
 
-        expect(page).to have_content("confirmation link")
+        expect(page).to have_content("A message with a code has been sent to your email address. ")
       end
     end
 
@@ -44,15 +43,14 @@ describe "Authentication", type: :system do
         within ".new_user" do
           fill_in :registration_user_email, with: "user@example.org"
           fill_in :registration_user_name, with: "Responsible Citizen"
-          fill_in :registration_user_nickname, with: "responsible"
           fill_in :registration_user_password, with: "DfyvHn425mYAy2HL"
-          fill_in :registration_user_password_confirmation, with: "DfyvHn425mYAy2HL"
           check :registration_user_tos_agreement
           check :registration_user_newsletter
+
           find("*[type=submit]").click
         end
 
-        expect(page).to have_content("lien de confirmation")
+        expect(page).to have_content("Vous devriez recevoir un code à 4 chiffres")
         expect(last_user.locale).to eq("fr")
       end
     end
@@ -65,16 +63,14 @@ describe "Authentication", type: :system do
           page.execute_script("$($('.new_user > div > input')[0]).val('Ima robot :D')")
           fill_in :registration_user_email, with: "user@example.org"
           fill_in :registration_user_name, with: "Responsible Citizen"
-          fill_in :registration_user_nickname, with: "responsible"
           fill_in :registration_user_password, with: "DfyvHn425mYAy2HL"
-          fill_in :registration_user_password_confirmation, with: "DfyvHn425mYAy2HL"
           check :registration_user_tos_agreement
           check :registration_user_newsletter
+
           find("*[type=submit]").click
         end
 
         expect(page).not_to have_content("confirmation link")
-        expect(page).not_to have_content("You have signed up successfully")
       end
     end
 
@@ -99,8 +95,8 @@ describe "Authentication", type: :system do
 
       visit last_email_link
 
-      expect(page).to have_content("successfully confirmed")
-      expect(last_user).to be_confirmed
+      expect(page).to have_content("You need to confirm your email address")
+      expect(last_user).not_to be_confirmed
     end
   end
 
@@ -140,7 +136,7 @@ describe "Authentication", type: :system do
       end
 
       expect(emails.count).to eq(2)
-      expect(page).to have_content("receive an email with instructions")
+      expect(page).to have_content("You should receive a 4 digit code at #{user.email}")
     end
   end
 
@@ -197,7 +193,6 @@ describe "Authentication", type: :system do
 
         within ".new_user" do
           fill_in :password_user_password, with: "DfyvHn425mYAy2HL"
-          fill_in :password_user_password_confirmation, with: "DfyvHn425mYAy2HL"
           find("*[type=submit]").click
         end
 
@@ -209,8 +204,7 @@ describe "Authentication", type: :system do
         visit last_email_link
 
         within ".new_user" do
-          fill_in :password_user_password, with: "example"
-          fill_in :password_user_password_confirmation, with: "example"
+          fill_in :password_user_password, with: "whatislove"
           find("*[type=submit]").click
         end
 
@@ -225,12 +219,11 @@ describe "Authentication", type: :system do
 
         within ".new_user" do
           fill_in :password_user_password, with: "example"
-          fill_in :password_user_password_confirmation, with: "example"
           find("*[type=submit]").click
         end
 
-        expect(page).to have_content("The password is too short.")
-        expect(page).to have_content("Password confirmation must match the password.")
+        expect(page).to have_content("is too short")
+        expect(page).not_to have_content("Password confirmation must match the password.")
       end
     end
 
@@ -366,15 +359,14 @@ describe "Authentication", type: :system do
           within ".new_user" do
             fill_in :registration_user_email, with: user.email
             fill_in :registration_user_name, with: "Responsible Citizen"
-            fill_in :registration_user_nickname, with: "responsible"
             fill_in :registration_user_password, with: "DfyvHn425mYAy2HL"
-            fill_in :registration_user_password_confirmation, with: "DfyvHn425mYAy2HL"
             check :registration_user_tos_agreement
             check :registration_user_newsletter
+
             find("*[type=submit]").click
           end
 
-          expect(page).to have_content("confirmation link")
+          expect(page).to have_content("A message with a code has been sent to your email address.")
         end
       end
     end

@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git
+  revision: 1c91e024ae4467c097b39673e5d78b06afd206d1
+  specs:
+    decidim-friendly_signup (0.4.5)
+      decidim-core (~> 0.27)
+
+GIT
   remote: https://github.com/opensourcepolitics/decidim-module-term_customizer.git
   revision: 8a6b73e58fbdd7f38daf983a310d37c510ec9baf
   branch: fix/multi-threading-compliant
@@ -586,7 +593,13 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.1)
+    nokogiri (1.13.4-aarch64-linux)
+      racc (~> 1.4)
     nokogiri (1.13.4-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.13.4-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.13.4-x86_64-linux)
       racc (~> 1.4)
     oauth (1.1.0)
       oauth-tty (~> 1.0, >= 1.0.1)
@@ -932,6 +945,7 @@ DEPENDENCIES
   decidim-cache_cleaner
   decidim-decidim_awesome (~> 0.9.1)
   decidim-dev (~> 0.27.0)
+  decidim-friendly_signup!
   decidim-spam_detection
   decidim-term_customizer!
   deface

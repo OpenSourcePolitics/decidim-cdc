@@ -6,6 +6,16 @@ GIT
       decidim-core (~> 0.27)
 
 GIT
+  remote: https://github.com/octree-gva/decidim-module-decidim_awesome.git
+  revision: afa824a79faa42f99eee5c0dcb4944e3a78b4a1d
+  branch: feat/awesome_decidim_private_fields
+  specs:
+    decidim-decidim_awesome (0.9.2)
+      decidim-admin (>= 0.26.0, < 0.28)
+      decidim-core (>= 0.26.0, < 0.28)
+      sassc (~> 2.3)
+
+GIT
   remote: https://github.com/opensourcepolitics/decidim-module-term_customizer.git
   revision: 8a6b73e58fbdd7f38daf983a310d37c510ec9baf
   branch: fix/multi-threading-compliant
@@ -304,10 +314,6 @@ GEM
     decidim-debates (0.27.5)
       decidim-comments (= 0.27.5)
       decidim-core (= 0.27.5)
-    decidim-decidim_awesome (0.9.3)
-      decidim-admin (>= 0.26.0, < 0.28)
-      decidim-core (>= 0.26.0, < 0.28)
-      sassc (~> 2.3)
     decidim-dev (0.27.5)
       axe-core-rspec (~> 4.1.0)
       byebug (~> 11.0)
@@ -943,7 +949,7 @@ DEPENDENCIES
   dalli
   decidim (~> 0.27.0)
   decidim-cache_cleaner
-  decidim-decidim_awesome (~> 0.9.1)
+  decidim-decidim_awesome!
   decidim-dev (~> 0.27.0)
   decidim-friendly_signup!
   decidim-spam_detection

@@ -1091,6 +1091,7 @@ ActiveRecord::Schema.define(version: 2024_07_15_133031) do
     t.string "machine_translation_display_priority", default: "original", null: false
     t.string "external_domain_whitelist", default: [], array: true
     t.boolean "enable_participatory_space_filters", default: true
+    t.jsonb "extra_user_fields", default: {"enabled"=>false}
     t.index ["host"], name: "index_decidim_organizations_on_host", unique: true
     t.index ["name"], name: "index_decidim_organizations_on_name", unique: true
     t.index ["secondary_hosts"], name: "index_decidim_organizations_on_secondary_hosts"

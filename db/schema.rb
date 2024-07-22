@@ -1220,6 +1220,7 @@ ActiveRecord::Schema.define(version: 2024_07_15_133031) do
     t.boolean "delete_inactive_users", default: false, null: false
     t.integer "delete_inactive_users_email_after"
     t.integer "delete_inactive_users_after"
+    t.jsonb "extra_user_fields", default: {"enabled"=>false}
     t.index ["host"], name: "index_decidim_organizations_on_host", unique: true
     t.index ["name"], name: "index_decidim_organizations_on_name", unique: true
   end

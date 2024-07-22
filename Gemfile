@@ -15,7 +15,7 @@ gem "decidim", "~> #{DECIDIM_VERSION}.0"
 
 # External Decidim gems
 gem "decidim-cache_cleaner"
-gem "decidim-decidim_awesome", "~> 0.9.1"
+gem "decidim-decidim_awesome", git: "https://github.com/octree-gva/decidim-module-decidim_awesome.git", branch: "feat/awesome_decidim_private_fields"
 gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: DECIDIM_BRANCH
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
 gem "decidim-spam_detection"

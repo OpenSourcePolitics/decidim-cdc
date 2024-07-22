@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_17_094815) do
+ActiveRecord::Schema.define(version: 2024_07_15_133031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -322,6 +322,14 @@ ActiveRecord::Schema.define(version: 2024_07_17_094815) do
     t.datetime "updated_at", null: false
     t.index ["decidim_author_id"], name: "decidim_awesome_editor_images_author"
     t.index ["decidim_organization_id"], name: "decidim_awesome_editor_images_constraint_organization"
+  end
+
+  create_table "decidim_awesome_private_proposal_fields", force: :cascade do |t|
+    t.text "private_body", default: "<xml></xml>"
+    t.bigint "proposal_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proposal_id"], name: "decidim_awesome_private_proposal_fields_idx"
   end
 
   create_table "decidim_blogs_posts", id: :serial, force: :cascade do |t|
@@ -1810,6 +1818,7 @@ ActiveRecord::Schema.define(version: 2024_07_17_094815) do
   add_foreign_key "decidim_awesome_config_constraints", "decidim_awesome_config"
   add_foreign_key "decidim_awesome_editor_images", "decidim_organizations"
   add_foreign_key "decidim_awesome_editor_images", "decidim_users", column: "decidim_author_id"
+  add_foreign_key "decidim_awesome_private_proposal_fields", "decidim_proposals_proposals", column: "proposal_id"
   add_foreign_key "decidim_budgets_budgets", "decidim_scopes"
   add_foreign_key "decidim_budgets_orders", "decidim_budgets_budgets"
   add_foreign_key "decidim_budgets_projects", "decidim_budgets_budgets"

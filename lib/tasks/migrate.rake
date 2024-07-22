@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'migrations_fixer'
-require 'rails_migrations'
+require "migrations_fixer"
+require "rails_migrations"
 
 namespace :decidim do
   namespace :db do

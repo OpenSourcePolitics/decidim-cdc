@@ -99,6 +99,13 @@ GEM
     activerecord (6.1.7.7)
       activemodel (= 6.1.7.7)
       activesupport (= 6.1.7.7)
+    activerecord-session_store (2.1.0)
+      actionpack (>= 6.1)
+      activerecord (>= 6.1)
+      cgi (>= 0.3.6)
+      multi_json (~> 1.11, >= 1.11.2)
+      rack (>= 2.0.8, < 4)
+      railties (>= 6.1)
     activestorage (6.1.7.7)
       actionpack (= 6.1.7.7)
       activejob (= 6.1.7.7)
@@ -191,6 +198,7 @@ GEM
     cells-rails (0.1.5)
       actionpack (>= 5.0)
       cells (>= 4.1.6, < 5.0.0)
+    cgi (0.4.1)
     charlock_holmes (0.7.7)
     chef-utils (18.4.2)
       concurrent-ruby
@@ -894,8 +902,6 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
-    uglifier (4.2.0)
-      execjs (>= 0.3.0, < 3)
     unaccent (0.4.0)
     unicode-display_width (2.5.0)
     uri (0.13.0)
@@ -956,6 +962,7 @@ PLATFORMS
 
 DEPENDENCIES
   activejob-uniqueness
+  activerecord-session_store
   aws-sdk-s3
   bootsnap (~> 1.4)
   brakeman (~> 5.1)
@@ -997,7 +1004,6 @@ DEPENDENCIES
   spring (~> 2.0)
   spring-watcher-listen (~> 2.0)
   sys-filesystem
-  uglifier (~> 4.1)
   web-console (= 4.0.4)
 
 RUBY VERSION

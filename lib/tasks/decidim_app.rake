@@ -44,6 +44,10 @@ namespace :decidim_app do
     task upgrade: :environment do
       puts "Running db:migrate"
       Rake::Task["db:migrate"].invoke
+    rescue StandardError => e
+      puts "Ignoring error: #{e.message}"
+      puts "Running decidim:db:migrate"
+      Rake::Task["decidim:db:migrate"].invoke
     end
 
     desc "usage: bundle exec rails k8s:dump_db"

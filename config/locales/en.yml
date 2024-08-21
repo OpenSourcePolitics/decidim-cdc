@@ -54,6 +54,15 @@ en:
           email_outro: You have received this notification because you are participating in "%{participatory_space_title}"
           email_subject: Your vote is still pending in %{participatory_space_title}
           notification_title: The vote on budget <a href="%{resource_path}">%{resource_title}</a> is still waiting for your confirmation in %{participatory_space_title}
+    proposals:
+      proposals:
+        show:
+          answer: Answer
+          back_to: Back to
+          back_to_list: Back to the list
+          changes_at_title: Changes at (%{title}")
+          comments: Comments
+          edit_proposal: Edit proposal
     verifications:
       authorizations:
         first_login:

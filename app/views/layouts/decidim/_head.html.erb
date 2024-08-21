@@ -26,6 +26,8 @@
 <%= invisible_captcha_styles %>
 <%= organization_colors %>
 <%= javascript_pack_tag "decidim_core", defer: false %>
+<%= javascript_pack_tag "decidim_admin", defer: false %>
+
 
 <%= render partial: "layouts/decidim/head_extra" %>
 <%== current_organization.header_snippets if Decidim.enable_html_header_snippets %>
@@ -34,3 +36,8 @@
 
 <%= stylesheet_pack_tag "decidim_decidim_awesome", media: "all" %>
 <%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles %>
+
+<%= javascript_pack_tag "decidim_decidim_awesome_custom_fields" if awesome_proposal_custom_fields %>
+
+<%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>
+

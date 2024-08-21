@@ -15,7 +15,8 @@ gem "decidim", "~> #{DECIDIM_VERSION}.0"
 
 # External Decidim gems
 gem "decidim-cache_cleaner"
-gem "decidim-decidim_awesome", "~> 0.9.1"
+gem "decidim-decidim_awesome", git: "https://github.com/octree-gva/decidim-module-decidim_awesome.git", branch: "feat/awesome_decidim_private_fields"
+gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: DECIDIM_BRANCH
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
 gem "decidim-spam_detection"
 gem "decidim-term_customizer", git: "https://github.com/opensourcepolitics/decidim-module-term_customizer.git", branch: "fix/multi-threading-compliant"
@@ -35,6 +36,7 @@ gem "nokogiri", "1.13.4"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "puma", ">= 5.5.1"
 
+gem "activerecord-session_store"
 gem "letter_opener_web", "~> 1.3"
 gem "rack-attack", "~> 6.6"
 gem "ruby-progressbar"
@@ -42,7 +44,6 @@ gem "sidekiq", "~> 6.0"
 gem "sidekiq_alive", "~> 2.2"
 gem "sidekiq-scheduler", "~> 5.0"
 gem "sys-filesystem"
-gem "uglifier", "~> 4.1"
 
 group :development do
   gem "listen", "~> 3.1"

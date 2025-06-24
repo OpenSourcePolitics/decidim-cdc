@@ -28,6 +28,12 @@ Decidim.configure do |config|
     }
   }
 
+  # Admin admin password configurations
+  config.admin_password_strong = Rails.application.secrets.dig(:decidim, :admin_password, :strong) == "true"
+  config.admin_password_expiration_days = Rails.application.secrets.dig(:decidim, :admin_password, :expiration_days)
+  config.admin_password_min_length = Rails.application.secrets.dig(:decidim, :admin_password, :min_length)
+  config.admin_password_repetition_times = Rails.application.secrets.dig(:decidim, :admin_password, :repetition_times)
+
   # Custom resource reference generator method
   # config.resource_reference_generator = lambda do |resource, feature|
   #   # Implement your custom method to generate resources references

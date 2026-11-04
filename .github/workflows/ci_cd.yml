@@ -109,15 +109,15 @@ jobs:
         name: RSpec
       #- run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
       #  name: Upload coverage
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: screenshots
+          name: screenshots-tests-${{ matrix.slice }}
           path: ./spec/tmp/screenshots
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: assets-manifest-${{ matrix.slice }}
+          name: assets-manifest-tests-${{ matrix.slice }}
           path: ./tmp/assets_manifest.json
   system_tests:
     strategy:
@@ -175,15 +175,15 @@ jobs:
         name: RSpec
       #- run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
       #  name: Upload coverage
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: screenshots
+          name: screenshots-system-tests-${{ matrix.slice }}
           path: ./spec/tmp/screenshots
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: assets-manifest-${{ matrix.slice }}
+          name: assets-manifest-system-tests-${{ matrix.slice }}
           path: ./tmp/assets_manifest.json
   test_build:
     name: Test build docker image

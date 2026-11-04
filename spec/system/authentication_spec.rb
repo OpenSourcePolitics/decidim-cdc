@@ -305,7 +305,15 @@ describe "Authentication", type: :system do
             within ".new_user" do
               fill_in :session_user_email, with: user.email
               fill_in :session_user_password, with: "not-the-pasword"
-              perform_enqueued_jobs { find("*[type=submit]").click }
+            end
+
+            # "Invalid" is already displayed by the previous attempts, so wait for the mail itself
+            # inside the block: the job is only performed if it is enqueued before the block ends
+            perform_enqueued_jobs do
+              within(".new_user") { find("*[type=submit]").click }
+              page.document.synchronize do
+                raise Capybara::ExpectationNotMet, "unlock email not sent yet" if emails.count.zero?
+              end
             end
 
             expect(page).to have_content("Invalid")
@@ -324,10 +332,14 @@ describe "Authentication", type: :system do
         it "resends the unlock instructions" do
           within ".new_user" do
             fill_in :unlock_user_email, with: user.email
-            perform_enqueued_jobs { find("*[type=submit]").click }
           end
 
-          expect(page).to have_content("If your account exists")
+          # Wait for the response inside the block so the mail job is enqueued before it ends
+          perform_enqueued_jobs do
+            within(".new_user") { find("*[type=submit]").click }
+            expect(page).to have_content("If your account exists")
+          end
+
           expect(emails.count).to eq(1)
         end
 

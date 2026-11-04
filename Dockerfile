@@ -5,6 +5,9 @@ ENV RAILS_ENV=production \
 
 WORKDIR /app
 
+# Debian bullseye is end-of-life: its packages moved from deb.debian.org to archive.debian.org
+RUN sed -i 's|http://deb.debian.org|http://archive.debian.org|g' /etc/apt/sources.list
+
 RUN apt-get update && \
     apt-get -y install libpq-dev curl git libicu-dev build-essential && \
     curl https://deb.nodesource.com/setup_16.x | bash && \
@@ -39,6 +42,9 @@ FROM ruby:3.0.6-slim as runner
 ENV RAILS_ENV=production \
     SECRET_KEY_BASE=dummy \
     RAILS_LOG_TO_STDOUT=true
+
+# Debian bullseye is end-of-life: its packages moved from deb.debian.org to archive.debian.org
+RUN sed -i 's|http://deb.debian.org|http://archive.debian.org|g' /etc/apt/sources.list
 
 RUN apt update && \
     apt install -y postgresql-client imagemagick libproj-dev proj-bin libjemalloc2 && \

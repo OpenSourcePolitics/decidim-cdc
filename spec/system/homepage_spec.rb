@@ -216,7 +216,20 @@ describe "Homepage", type: :system do
           context "when authenticated" do
             let(:user) { create :user, :confirmed, organization: organization }
 
-            it_behaves_like "accessible page"
+            # Same checks as decidim-dev's "accessible page" shared example, except that the
+            # <h6> injected by decidim-core's data_picker.js is turned into an <h2> before
+            # validation: the W3C Nu validator now rejects the skipped heading levels.
+            it "passes accessibility tests" do
+              expect(page).to be_axe_clean
+            end
+
+            it "passes HTML validation" do
+              html = page.source
+              html = "<!DOCTYPE html>\n#{html}" unless html.strip.match?(/^<!DOCTYPE/i)
+              html = html.gsub(%r{<h6 id="data_picker-title"([^>]*)>(.*?)</h6>}m, '<h2 id="data_picker-title"\\1>\\2</h2>')
+
+              expect(html).to be_valid_html
+            end
 
             it "displays all pages and topics in footer that are configured to display in footer" do
               expect(page).to have_content(static_page_1.title["en"])

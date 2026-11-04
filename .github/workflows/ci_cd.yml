@@ -171,6 +171,8 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v2
+      - run: sudo apt-get update && sudo apt-get install -y imagemagick
+        name: Install ImageMagick
       - run:  bundle exec rake "test:run[include, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
         name: RSpec
       #- run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH

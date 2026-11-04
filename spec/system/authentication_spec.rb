@@ -132,11 +132,15 @@ describe "Authentication", type: :system do
 
       within ".new_user" do
         fill_in :confirmation_user_email, with: user.email
-        perform_enqueued_jobs { find("*[type=submit]").click }
+      end
+
+      # Wait for the response inside the block so the mail job is enqueued before it ends
+      perform_enqueued_jobs do
+        within(".new_user") { find("*[type=submit]").click }
+        expect(page).to have_content("You should receive a 4 digit code at #{user.email}")
       end
 
       expect(emails.count).to eq(2)
-      expect(page).to have_content("You should receive a 4 digit code at #{user.email}")
     end
   end
 
@@ -164,10 +168,14 @@ describe "Authentication", type: :system do
 
         within ".new_user" do
           fill_in :password_user_email, with: user.email
-          perform_enqueued_jobs { find("*[type=submit]").click }
         end
 
-        expect(page).to have_content("If your email address exists in our database")
+        # Wait for the response inside the block so the mail job is enqueued before it ends
+        perform_enqueued_jobs do
+          within(".new_user") { find("*[type=submit]").click }
+          expect(page).to have_content("If your email address exists in our database")
+        end
+
         expect(emails.count).to eq(1)
       end
 

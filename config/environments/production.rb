@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "decidim_app/static_cache_control"
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -23,6 +25,11 @@ Rails.application.configure do
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
+
+  # Fingerprinted packs and assets never change once built: let browsers and
+  # proxies keep them for a year. Scoped to /decidim-packs/ and /assets/ so that
+  # non-fingerprinted files (robots.txt, favicon.ico...) are not marked immutable.
+  config.middleware.insert_before ActionDispatch::Static, DecidimApp::StaticCacheControl if config.public_file_server.enabled
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
